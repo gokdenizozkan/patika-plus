@@ -1,18 +1,11 @@
 package java101;
 
-import patikaplus.week1.FlightTicketPriceCalculator;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Pratikler {
-    public static void main(String[] args) throws Exception {
-        FlightTicketPriceCalculator.runCalculation(true);
-    }
-
-
     // PRATIK 8 - hesap makinesi
     public static void p08HesapMakinesi() {
         double[] hesaplanacaklar = new double[2];
