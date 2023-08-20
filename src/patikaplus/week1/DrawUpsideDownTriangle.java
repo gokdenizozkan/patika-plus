@@ -11,7 +11,7 @@ public class DrawUpsideDownTriangle {
         baseLength = input.nextInt();
 
         for (int i = 0; i < baseLength; i++) {
-            // Print baseLenght - 2*/loop amount of *
+            // Print baseLength - 2*/loop amount of *
             starCount = baseLength - (i * 2);
             if (starCount < 1) break;
 
