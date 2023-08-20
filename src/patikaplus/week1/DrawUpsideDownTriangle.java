@@ -7,7 +7,7 @@ public class DrawUpsideDownTriangle {
         Scanner input = new Scanner(System.in);
         int baseLength, starCount;
 
-        System.out.println("How many stars should the base lenght of the triangle be?");
+        System.out.println("How many stars should the base length of the triangle be?");
         baseLength = input.nextInt();
 
         for (int i = 0; i < baseLength; i++) {
