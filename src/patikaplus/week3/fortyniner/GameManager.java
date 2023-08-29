@@ -16,24 +16,22 @@ public class GameManager {
     // TODO FEATURE: MARKING DEATHSPOTS: *1-1
     static Scanner sc = new Scanner(System.in);
 
-    static class Settings {
-        static Gamemodes gamemode;
-        enum Gamemodes {
-            NINER, FORTYNINER, CUSTOM;
+    static Gamemodes gamemode;
+    enum Gamemodes {
+        NINER, FORTYNINER, CUSTOM;
 
-            public int[] getRatio() {
-                return switch (name()) {
-                    case "NINER" -> new int[]{9, 9};
-                    case "FORTYNINER" -> new int[]{9, 40};
-                    default -> newRatio();
-                };
-            }
-
-            public String getName() {
-                return Printer.getCapitalized(toString());
-            }
-
+        public int[] getRatio() {
+            return switch (name()) {
+                case "NINER" -> new int[]{9, 9};
+                case "FORTYNINER" -> new int[]{40, 9};
+                default -> newRatio();
+            };
         }
+
+        public String getName() {
+            return Printer.getCapitalized(toString());
+        }
+
     }
 
     public static void launch() {
@@ -49,15 +47,15 @@ public class GameManager {
     private static void setup() {
         printTitle("SETUP");
         print("Please choose your gamemode:\n");
-        printOptions(Arrays.stream(Settings.Gamemodes.values()).map(Object::toString).toArray(String[]::new)); // Converts Gamemodes[] object to String[]
+        printOptions(Arrays.stream(Gamemodes.values()).map(Object::toString).toArray(String[]::new)); // Converts Gamemodes[] object to String[]
 
         switch (sc.nextInt()) {
-            case 0 -> Settings.gamemode = Settings.Gamemodes.NINER;
-            case 1 -> Settings.gamemode = Settings.Gamemodes.FORTYNINER;
-            case 2 -> Settings.gamemode = Settings.Gamemodes.CUSTOM;
+            case 0 -> gamemode = Gamemodes.NINER;
+            case 1 -> gamemode = Gamemodes.FORTYNINER;
+            case 2 -> gamemode = Gamemodes.CUSTOM;
         }
 
-        new Board(Settings.gamemode.getRatio());
+        new Board(gamemode.getRatio());
 
         printTitle("SETUP: Difficulty");
         print("Please enter the difficulty level you desire to play:\n");
