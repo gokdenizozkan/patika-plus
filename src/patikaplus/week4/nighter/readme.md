@@ -5,18 +5,22 @@
 ```mermaid
 classDiagram
     direction LR
+    GameManager <-- StateMachine
     GameManager <-- SignalManager
     SignalManager <-- Signal
     
-    %%Character <-- SignalManager
-    Character *-- Signal
-    Character o-- Vessel
+    Signal *-- SignalGroup
+    
+    %%Being <-- SignalManager
+    Being *-- Signal
+    Being o-- Vessel
+    Being <|-- Player
+    Being <|-- Enemy
 
     Vessel *-- Id
     Vessel <|-- Human
     Vessel <|-- Creature
     Vessel <-- Holder
-    
     
     %%Holder <-- SignalManager
     Holder <|-- Inventory
@@ -31,167 +35,198 @@ classDiagram
     %%Location <-- SignalManager
     Location *-- Id
     Location *-- LocationProperty
-    Location o--Character
+    Location o--Being
 
-    class SignalManager {
-        +receiveSignal(Object emitter, Object... target) $
-        -channelSignal() $
+    namespace util {
+        class Print {
+            
+        }
+        
+        class Input {
+            
+        }
     }
-
-    class Signal {
-        -String signal
-        +emit()
-    }
-
-    class GameManager {
-        +tick() $
-    }
-
-    class Id {
-        <<enumeration>>
-        +VESSEL
-        +ITEM
-        +LOCATION
-
-        -final int id
-        -Map~Id-int~ assignReadyIds $
-
-        Id()
-        +get() Id
-        +getId() int
-        +getType() String
-    }
-
-    class LocationProperty {
-        <<enumeration>>
-        +SAFE
-        +TRADE
-        +COMBAT
-        +TREASURE
-    }
-
-    Character <|-- Player
-    Character <|-- Ai
-
-    class Character {
-        <<abstract>>
-        -String name
-        -Vessel class
-        -int totalHealth
-        -int totalDamage
-        -Inventory inventory
-        -Armor armor
-        -Weapon weapon
-
-        -Signal died
-        -Signal attacked
-        -Signal fled
-
-    %% Actions
-        -attack()
-        -defend()
-        -flee() %% No priority
-    %% Reactions
-        +takeDamage(int amount)
-        -calcProtection() int
-    }
-
-    class Player {
-        <<abstract>>
-        -Signal looted
-        -loot(Holder holder)
-    }
-
-    class Ai {
-        <<abstract>>
-        +think()
-    }
-
     
+    namespace manag {
+        class SignalManager {
+            +receiveSignal(Object emitter, Object... target) $
+            -channelSignal() $
+        }
 
-    class Vessel {
-        <<abstract>>
-        -final Id id
-        -int baseHealth
-        -int baseDamage
-        -String genericName
+        class GameManager {
+            -Player player $
+            
+            #tick() $
+            #end() $
+            #getPlayer() Player $
+        }
+        
+        class StateMachine {
+            +FREE
+            +COMBAT
+        }
+    }
+    
+    namespace arran {
+        class Id {
+            <<enumeration>>
+            +VESSEL
+            +ITEM
+            +LOCATION
+
+            -final int id
+            -Map~Id-int~ assignReadyIds $
+
+            Id()
+            +getValue() int
+        }
+
+        class LocationProperty {
+            <<enumeration>>
+            +SAFE
+            +TRADE
+            +COMBAT
+            +TREASURE
+        }
+
+        class Signal {
+            <<enumeration>>
+            +DIED
+            +ATTACKED
+            +FLED
+
+            -SignalGroup group
+
+            -Signal(SignalGroup group)
+            +emit()
+            -getGroup() SignalGroup
+        }
+
+        class SignalGroup {
+            <<enumeration>>
+            +BEING
+            +ITEM
+            +LOCATION
+        }
     }
 
-    class Human {
-        <<abstract>>
+    namespace blup {
+        class Being {
+            <<abstract>>
+            -String name
+            -Vessel class
+            -int maxHealth
+            -int totalDamage
+            -Inventory inventory
+            -Armor armor
+            -Weapon weapon
+
+            -Signal died
+            -Signal attacked
+            -Signal fled
+
+        %% Actions
+            -attack()
+            -defend()
+            -flee() %% No priority
+        %% Reactions
+            +takeDamage(int amount)
+            -calcProtection() int
+        }
+
+        class Vessel {
+            <<abstract>>
+            -final Id id
+            -int baseHealth
+            -int baseDamage
+            -String genericName
+        }
+
+        class Human {
+            <<abstract>>
+        }
+
+        class Creature {
+            <<abstract>>
+        }
+
+        class Holder {
+            <<abstract>>
+            -String name
+            -Map~Id-Item~ slots
+            -int gold
+            -boolean empty
+
+        %% Constructors
+            Holder()
+            Holder(int gold)
+            Holder(Item item)
+            Holder(int gold, Item... items)
+
+        %% Methods
+            +add(Item item)
+            +remove(Item item)
+            +transferGold(Holder target)
+            +transferItem(Holder target)
+            +isEmpty() boolean
+        }
+
+        class Item {
+            <<abstract>>
+            -final Id id
+            -int price
+            -String name
+        }
+
+        class Location {
+            <<abstract>>
+            -final Id id
+            -String name
+            -ArrayList~LocationProperty~ properties
+            -ArrayList~Being~  here
+
+            +add(Being being)
+            +remove(Being being)
+        }
     }
 
-    class Creature {
-        <<abstract>>
-    }
+    namespace prod {
+        class Player {
+            -Signal looted
+            -loot(Holder holder)
+        }
 
-    class Holder {
-        <<abstract>>
-        -String name
-        -Map~Id-Item~ slots
-        -int gold
-        -boolean empty
+        class Enemy {
+            +think()
+        }
 
-    %% Constructors
-        Holder()
-        Holder(int gold)
-        Holder(Item item)
-        Holder(int gold, Item... items)
+        class Chest {
+            +getLooted()
+        }
 
-    %% Methods
-        +add(Item item)
-        +remove(Item item)
-        +transferGold(Holder target)
-        +transferItem(Holder target)
-        +isEmpty() boolean
-    }
+        class Inventory {
+        %% By chance
+            +dropItem()
+        }
 
-    class Chest {
-        +getLooted()
-    }
+        class Weapon {
+            -int atkPoint
+        }
 
-    class Inventory {
-    %% By chance
-        +dropItem()
-    }
+        class Armor {
+            -int defPoint
+        }
 
-    class Item {
-        <<abstract>>
-        -final Id id
-        -int price
-        -String name
-    }
+        class Unique {
 
-    class Weapon {
-        <<abstract>>
-        -int atkPoint
-    }
-
-    class Armor {
-        <<abstract>>
-        -int defPoint
-    }
-
-    class Unique {
-        <<abstract>>
-    }
-
-    class Location {
-        <<abstract>>
-        -final Id id
-        -String name
-        -Array~LocationProperty~ properties
-        -Array~Character~  here
-
-        +add(Character character)
-        +remove(Character character)
+        }
     }
 ```
 ## Utils
 ### Printer
 ```mermaid
 classDiagram
-    class Printer {
+    class Print {
         
     }
 ```
@@ -211,7 +246,8 @@ For example: Vessel1 attacked Vessel2, Vessel.takeDamage() will be called on Ves
 Switch Case could be used for it.
 ```mermaid
 classDiagram
-    Signal --> SignalManager : "emit() method calls receiveSignal() with self"
+    SignalManager <-- Signal : "emit() method calls receiveSignal() with self"
+    Signal *-- SignalGroup
     
     note for SignalManager "Acts like an Event Handler.\n~channelSignal() makes necessary calls"
     
@@ -219,18 +255,45 @@ classDiagram
         +receiveSignal(Object emitter, Object... target) $
         -channelSignal() $
     }
-    
+
     class Signal {
-        -String signal
+        <<enumeration>>
+        +DIED
+        +ATTACKED
+        +FLED
+
+        -SignalGroup group
+
+        -Signal(SignalGroup group)
         +emit()
+        -getGroup() SignalGroup
+    }
+
+    class SignalGroup {
+        <<enumeration>>
+        +BEING
+        +ITEM
+        +LOCATION
     }
 ```
 
 ### Game Manager
 ```mermaid
 classDiagram
+    GameManager <-- StateMachine
+    GameManager <-- SignalManager
+    
     class GameManager {
-        +tick() $
+        -Player player $
+        
+        #tick() $
+        #end() $
+        #getPlayer() Player $
+    }
+
+    class StateMachine {
+        +FREE
+        +COMBAT
     }
 ```
 
@@ -247,9 +310,7 @@ classDiagram
         -Map~Id-int~ assignReadyIds $
 
         Id()
-        +get() Id
-        +getId() int
-        +getType() String
+        +getValue() int
     }
     
     class LocationProperty {
@@ -261,17 +322,17 @@ classDiagram
     }
 ```
 
-## Character
+## Being
 ```mermaid
 classDiagram
-    Character <|-- Player
-    Character <|-- Ai
+    Being <|-- Player
+    Being <|-- Enemy
     
-    class Character {
+    class Being {
         <<abstract>>
         -String name
         -Vessel class
-        -int totalHealth
+        -int maxHealth
         -int totalDamage
         -Inventory inventory
         -Armor armor
@@ -291,13 +352,11 @@ classDiagram
     }
     
     class Player {
-        <<abstract>>
         -Signal looted
         -loot(Holder holder)
     }
     
-    class Ai {
-        <<abstract>>
+    class Enemy {
         +think()
     }
 ```
@@ -405,10 +464,10 @@ classDiagram
         <<abstract>>
         -final Id id
         -String name
-        -Array~LocationProperty~ properties
-        -Array~Character~  here
+        -ArrayList~LocationProperty~ properties
+        -ArrayList~Being~  here
         
-        +add(Character character)
-        +remove(Character character)
+        +add(Being being)
+        +remove(Being being)
     }
 ```
