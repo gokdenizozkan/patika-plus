@@ -1,28 +1,36 @@
 package patikaplus.week4.nighter.arran;
 
-import java.util.HashMap;
-import java.util.Map;
+public class Id {
+    private final int id;
+    private static int[] assignReadyIds;
+    private final Type type;
 
-public enum Id {
-    VESSEL, ITEM, LOCATION;
+    public enum Type {
+        VESSEL, ITEM, LOCATION
+    }
 
-    final int id;
-    static Map<Id, Integer> assignReadyIds = new HashMap<>();
+    static {
+        assignReadyIds = new int[Type.values().length];
+        for (int i = 0; i < assignReadyIds.length; i++) {
+            assignReadyIds[i] = 1;
+        }
+    }
 
-    Id() {
-        this.id = initId(this);
-        updateAssignReadyIds(this);
+    public Id(Type type) {
+        this.type = type;
+        this.id = initId(type);
+        updateAssignReadyIds(type);
     }
 
     public int getValue() {
         return id;
     }
 
-    private int initId(Id type) {
-        return assignReadyIds.get(type);
+    private int initId(Type type) {
+        return assignReadyIds[type.ordinal()];
     }
 
-    private void updateAssignReadyIds(Id type) {
-        assignReadyIds.put(type, (type.id + 1));
+    private void updateAssignReadyIds(Type type) {
+        assignReadyIds[type.ordinal()]++;
     }
 }
