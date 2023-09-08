@@ -8,4 +8,12 @@ public class Tengri {
     public static boolean flipCoin() {
         return dice.nextBoolean();
     }
+
+    public static int range(int max) {
+        return dice.nextInt(max);
+    }
+
+    public static int range(int min, int max) {
+        return dice.nextInt(min, max);
+    }
 }

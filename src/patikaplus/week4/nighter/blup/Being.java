@@ -1,60 +1,99 @@
 package patikaplus.week4.nighter.blup;
 
-import patikaplus.week4.nighter.prod.Armor;
-import patikaplus.week4.nighter.prod.Inventory;
-import patikaplus.week4.nighter.prod.Weapon;
 import patikaplus.week4.nighter.arran.Signal;
+import patikaplus.week4.nighter.util.Tengri;
 
-public abstract class Being {
+public class Being {
+    private final Vessel vessel;
+    private final Signal died;
+    private final Signal attacked;
+    private final Signal defended;
+    private final Signal fled;
+
+    private Holder inventory;
+    private Armor armor;
+    private Weapon weapon;
+    private Location currentLocation;
     private String name;
-    private Vessel charClass;
-    private int health;
+    private int currentHealth;
     private int maxHealth;
     private int totalDamage;
-    Inventory inventory;
-    Armor armor;
-    Weapon weapon;
+    private boolean combatStateDefending;
 
-    Location currentLocation;
+    public Being(String name, Vessel vessel) {
+        this.died = new Signal(this, Signal.Type.DIED);
+        this.attacked = new Signal(this, Signal.Type.ATTACKED);
+        this.defended = new Signal(this, Signal.Type.DEFENDED);
+        this.fled = new Signal(this, Signal.Type.FLED);
 
-    Signal died;
-    Signal attacked;
-    Signal fled;
+        this.name = name;
+        this.vessel = vessel;
 
-    public Being() {
-        this.died = Signal.DIED;
-        this.attacked = Signal.ATTACKED;
-        this.fled = Signal.FLED;
+        this.maxHealth = this.vessel.getBaseHealth();
+        this.currentHealth = maxHealth;
+
+        this.totalDamage = (this.vessel.getBaseDamage() + weapon.getAtkPoint());
     }
 
-    private void attack() {
+    public void attack() {
+        combatStateDefending = false;
         attacked.emit(calcDamage());
     }
 
-    private void defend() {
-        //
+    public void defend() {
+        combatStateDefending = true;
+        defended.emit();
     }
 
-    private void flee() {
-        fled.emit();
+    public void flee() {
+        if (Tengri.flipCoin()) {
+            fled.emit();
+        }
     }
 
     public int calcDamage() {
-        return 0;
+        return totalDamage;
     }
 
     public void takeDamage(int amount) {
         amount -= calcProtection();
         if (amount > 0) {
-            health -= amount;
+            currentHealth -= amount;
+        }
+
+        if (currentHealth <= 0) {
+            died.emit();
         }
     }
 
     private int calcProtection() {
-        return 0;
+        int protection = armor.getDefPoint();
+        if (combatStateDefending) protection += (totalDamage / 4);
+        return protection;
+    }
+
+    private int calcProtection(boolean withAtkPower) {
+        // Possible improvement with "ability point" => 4 could be decreased
+        return (calcProtection() + (totalDamage / 4));
     }
 
     public Location getCurrentLocation() {
         return currentLocation;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isDead() {
+        return this.currentHealth <= 0;
+    }
+
+    public Holder getInventory() {
+        return inventory;
     }
 }

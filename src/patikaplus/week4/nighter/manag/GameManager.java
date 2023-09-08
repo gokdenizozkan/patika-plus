@@ -42,14 +42,14 @@ public class GameManager {
                 length = Action.getNames().length;
             }
 
-            protected static void init() {
+            private static void init() {
                 Action[] values = values();
                 String[] names = new String[values.length];
                 for (int i = 0; i < values.length; i++) {
                     names[i] = values[i].name();
-                    actions[i] = values[i];
                 }
                 Action.names = names;
+                Action.actions = values;
             }
 
             public static String[] getNames() {
@@ -76,6 +76,7 @@ public class GameManager {
                 case DEFEND -> actor.defend();
                 case FLEE -> actor.flee();
             }
+            nextTurn();
         }
 
         protected static void start() throws Exception {
@@ -87,11 +88,17 @@ public class GameManager {
         protected static void end() {
             currentFight = null;
             gameState = State.FREE;
-            opponent.getInventory().transferAll(player.getInventory());
+            if (isThereAnyDead()) {
+                opponent.getInventory().transferAll(player.getInventory());
+            }
         }
 
         protected static boolean isPlayersTurn() {
             return playersTurn;
+        }
+
+        protected static boolean isThereAnyDead() {
+            return (player.isDead() || opponent.isDead());
         }
 
         protected static Being getOpponent() {
@@ -100,6 +107,7 @@ public class GameManager {
 
         protected static void nextTurn() {
             playersTurn = !playersTurn;
+            loop();
         }
     }
 

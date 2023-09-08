@@ -11,10 +11,6 @@ public class SignalManager {
         }
     }
 
-    private static void channelSignal() {
-        //
-    }
-
     private static void handleBeing(Signal signal, Object... args) {
         switch (signal.getType()) {
             case DIED -> {
@@ -34,12 +30,10 @@ public class SignalManager {
                     GameManager.getPlayer().takeDamage((int) args[0]);
                 }
             }
-            case DEFENDED -> {
-                // Do nothing
-            }
-            case FLED -> System.out.println("Just signalled FLED, WIP"); // TODO
+            // DEFEND action is passive, so it does not need a function call, thus no "case DEFENDED" needed.
+            case FLED -> GameManager.Fight.end();
             case LOOTED -> {
-
+                // TODO no priority atm : Loot from enemies already implemented
             }
         }
     }

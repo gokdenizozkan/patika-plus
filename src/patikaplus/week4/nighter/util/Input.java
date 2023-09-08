@@ -31,6 +31,7 @@ public class Input {
 
     public static class Ai {
         public static Action getAction() {
+            // TODO BETTER AI, no priority atm
             return Action.getActions()
                     [Tengri.range(
                         Action.length)];

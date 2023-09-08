@@ -28,20 +28,6 @@ public class Print {
         //
     }
 
-    public static class Ui {
-        public static void combat() {
-            //
-        }
-
-        public static void trade() {
-            //
-        }
-
-        public static void safehouse() {
-            //
-        }
-    }
-
     // Misc
     private static void ln(int... amount) {
         if (amount.length > 0) {
@@ -62,4 +48,28 @@ public class Print {
         }
         System.out.print(" ");
     }
+
+    // Game-specific
+
+    public static class Nighter {
+        public static class Ui {
+            public static void combat() {
+                //
+            }
+
+            public static void trade() {
+                //
+            }
+
+            public static void safehouse() {
+                //
+            }
+
+            public static void wander() {
+
+            }
+        }
+    }
+
+
 }
