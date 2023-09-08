@@ -78,7 +78,7 @@ public class Signal {
     }
 
     public enum Type {
-        DIED(Group.BEING), ATTACKED(Group.BEING), FLED(Group.BEING), LOOTED(Group.BEING),
+        DIED(Group.BEING), ATTACKED(Group.BEING), DEFENDED(Group.BEING), FLED(Group.BEING), LOOTED(Group.BEING),
         LOCATIONADDED(Group.LOCATION);
 
         private final Group group;
