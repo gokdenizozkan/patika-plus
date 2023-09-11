@@ -2,7 +2,7 @@ package patikaplus.week1.java101;
 
 import java.util.Scanner;
 
-public class SumPow45TilN {
+public class PrintPow45TilN {
     private static final Scanner sc = new Scanner(System.in);
 
     public static void run() {
