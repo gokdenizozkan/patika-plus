@@ -9,7 +9,6 @@ public class CalcCombination {
         long[] set;
         long subsetMemberAmount;
 
-        System.out.println(factorial(10));
         System.out.println("Please enter the member amount for your set:");
         set = new long[sc.nextInt()];
 
