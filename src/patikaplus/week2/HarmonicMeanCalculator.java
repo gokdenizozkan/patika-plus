@@ -2,7 +2,7 @@ package patikaplus.week2;
 
 import java.util.Scanner;
 
-public class ArrayHarmonicSeriesCalculator {
+public class HarmonicMeanCalculator {
     private static final Scanner sc = new Scanner(System.in);
 
     public static void run() {
