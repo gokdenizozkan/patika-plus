@@ -1,4 +1,4 @@
-package patikaplus.week2.salarycalculator;
+package java101.salarycalculator;
 
 public class Employee {
     String name;
