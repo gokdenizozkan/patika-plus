@@ -1,12 +1,12 @@
 package patikaplus.week2;
 
-import patikaplus.Util;
+import patikaplus.util.Input;
 
 public class PrintLetterB {
     public static void run() {
         // use of 2D array is only for the given problem, it is not necessary.
         System.out.println("Please enter the size of your letter B:\n(should be an even number\nand greater than or equal to 2)");
-        int size = Util.getInputInt(); // size should be even and greater than or equal to 2
+        int size = Input.getInputInt(); // size should be even and greater than or equal to 2
         int[][] letter = new int[size - 1][size];
         int sizeR = letter.length;
         int incrementor = (size/2) - 1; // for sizeR is an odd number, possible full line stars are found in this calc.

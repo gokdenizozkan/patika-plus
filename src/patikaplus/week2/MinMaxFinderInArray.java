@@ -1,11 +1,12 @@
 package patikaplus.week2;
 
-import patikaplus.util;
+import patikaplus.util.Input;
+import patikaplus.util.Parse;
 
 public class MinMaxFinderInArray {
     public static void run() {
         System.out.println("Please enter your data set by separating them with spaces:");
-        int[] in = util.parseIntArray(util.getInputsBySpace());
+        int[] in = Parse.toArrayInt(Input.getInputsBySpace());
         System.out.printf("Min: %d\nMax: %d", min(in), max(in));
     }
 
