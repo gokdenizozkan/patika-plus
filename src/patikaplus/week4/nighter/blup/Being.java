@@ -72,11 +72,6 @@ public class Being {
         return protection;
     }
 
-    private int calcProtection(boolean withAtkPower) {
-        // Possible improvement with "ability point" => 4 could be decreased
-        return (calcProtection() + (totalDamage / 4));
-    }
-
     public Location getCurrentLocation() {
         return currentLocation;
     }
