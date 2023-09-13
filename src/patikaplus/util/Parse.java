@@ -1,25 +1,36 @@
 package patikaplus.util;
 
 public class Parse {
-    public static double[] toArrayDouble(String[] strArray) {
-        int len = strArray.length;
-        double[] doubleArray = new double[len];
+    public static double[] toArrayDouble(String[] arr) {
+        int len = arr.length;
+        double[] arrReturn = new double[len];
 
         for (int i = 0; i < len; i++) {
-            doubleArray[i] = Double.parseDouble(strArray[i]);
+            arrReturn[i] = Double.parseDouble(arr[i]);
         }
 
-        return doubleArray;
+        return arrReturn;
     }
 
-    public static int[] toArrayInt(String[] strArray) {
-        int len = strArray.length;
-        int[] intArray = new int[len];
+    public static int[] toArrayInt(String[] arr) {
+        int len = arr.length;
+        int[] arrReturn = new int[len];
 
         for (int i = 0; i < len; i++) {
-            intArray[i] = Integer.parseInt(strArray[i]);
+            arrReturn[i] = Integer.parseInt(arr[i]);
         }
 
-        return intArray;
+        return arrReturn;
+    }
+
+    public static Integer[] toArrayInteger(String[] arr) {
+        int len = arr.length;
+        Integer[] arrReturn = new Integer[len];
+
+        for (int i = 0; i < len; i++) {
+            arrReturn[i] = Integer.parseInt(arr[i]);
+        }
+
+        return arrReturn;
     }
 }

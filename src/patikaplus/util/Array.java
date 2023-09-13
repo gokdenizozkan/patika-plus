@@ -1,6 +1,40 @@
 package patikaplus.util;
 
 public class Array {
+    public static String reverse(String str) {
+        char[] charArr = str.toCharArray();
+        int len = charArr.length;
+        char[] reversed = new char[len];
+
+        len--; // to make it index
+        for (int i = len; i >= 0; i--) {
+            reversed[len - i] = charArr[i];
+        }
+        return String.valueOf(reversed);
+    }
+
+    public static char[] reverse(char[] charArr) {
+        int len = charArr.length;
+        char[] reversed = new char[len];
+
+        len--; // to make it index
+        for (int i = len; i >= 0; i--) {
+            reversed[len - i] = charArr[i];
+        }
+        return reversed;
+    }
+
+    public static int[] reverse(int[] intArr) {
+        int len = intArr.length;
+        int[] reversed = new int[len];
+
+        len--; // to make it index
+        for (int i = len; i >= 0; i--) {
+            reversed[len - i] = intArr[i];
+        }
+        return reversed;
+    }
+
     public static boolean doesContain(int[] arr, int i) {
         for (int e : arr) {
             if (e == i) return true;

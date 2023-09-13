@@ -16,16 +16,27 @@ public class Input {
     }
 
     // Methods
-    public static int getInputInt() {
+    public static int getInt(String... ask) {
+        if (!isEmpty(ask)) System.out.println(ask[0]);
         return sc.nextInt();
     }
 
-    public static String[] getInputsBySpace() {
-        return sc.nextLine().trim().split(" ");
+    public static String getLine(String... ask) {
+        if (!isEmpty(ask)) System.out.println(ask[0]);
+        return sc.nextLine();
+    }
+
+    public static String[] getLine(char separator, String... ask) {
+        if (!isEmpty(ask)) System.out.println(ask[0]);
+        return sc.nextLine().trim().split(String.valueOf(separator));
     }
 
     // Misc
     public static void resetScanner() {
         new Input();
+    }
+
+    private static boolean isEmpty(String[] arr) {
+        return arr.length == 0;
     }
 }

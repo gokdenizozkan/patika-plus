@@ -6,7 +6,7 @@ import patikaplus.util.Parse;
 public class MinMaxFinderInArray {
     public static void run() {
         System.out.println("Please enter your data set by separating them with spaces:");
-        int[] in = Parse.toArrayInt(Input.getInputsBySpace());
+        int[] in = Parse.toArrayInt(Input.getLine(' '));
         System.out.printf("Min: %d\nMax: %d", min(in), max(in));
     }
 

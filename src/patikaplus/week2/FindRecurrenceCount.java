@@ -5,9 +5,7 @@ import patikaplus.util.Input;
 
 public class FindRecurrenceCount {
     public static void run() { // 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5
-        System.out.println("Please enter your data set separated by spaces:");
-        Integer[] ins = toArrayInteger(Input.getInputsBySpace());
-
+        Integer[] ins = toArrayInteger(Input.getLine(' ', "Please enter your data set separated by spaces:"));
         Integer[] uniqs = uniques(ins);
 
         System.out.println("Recurrence Counts:");

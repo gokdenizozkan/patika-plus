@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class RecurringNumFinder {
     public static void run() {
         System.out.println("Please enter your data set separated with spaces:\n(10 50 200 90)");
-        int[] ins = Parse.toArrayInt(Input.getInputsBySpace());
+        int[] ins = Parse.toArrayInt(Input.getLine(' '));
         ArrayList<Integer> recurs = new ArrayList<>();
 
         for (int i : ins) {
