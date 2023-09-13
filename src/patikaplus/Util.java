@@ -2,8 +2,12 @@ package patikaplus;
 
 import java.util.Scanner;
 
-public class util {
+public class Util {
     private static final Scanner sc = new Scanner(System.in);
+
+    public static int getInputInt() {
+        return sc.nextInt();
+    }
 
     public static String[] getInputsBySpace() {
         return sc.nextLine().trim().split(" ");
@@ -57,5 +61,9 @@ public class util {
             }
         }
         return m;
+    }
+
+    public static int floor(float f) {
+        return 0;
     }
 }
