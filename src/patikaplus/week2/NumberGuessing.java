@@ -7,29 +7,26 @@ import patikaplus.util.Tengri;
 public class NumberGuessing {
     public static void main(String[] args) {
         int num = Tengri.range(100);
-        int maxAttempts = 5;
-        int attempts = 0;
-        int triesLeft = maxAttempts;
+        int triesLeft = 5;
         boolean guessed = false;
 
-        while (attempts < maxAttempts) {
-            int in = Input.getInt("Your guess:");
-            attempts++;
+        while (triesLeft > 0) {
+            Print.fline("You have %d %s left!" , triesLeft, triesLeft == 1 ? "try" : "tries");
+            int in = Input.getInt("\nYour guess:");
 
             if (in == num) {
                 guessed = true;
                 break;
             }
 
-            triesLeft = maxAttempts - attempts;
-            if (triesLeft == 0) break;
-            if (in < num) Print.line("Secret number is higher than your input.", 1);
-            else Print.line("Try a lower number.", 1);
-            System.out.printf("You have %d %s left!\n" , triesLeft, triesLeft == 1 ? "try" : "tries");
+            if (in < num) Print.nline("Secret number is higher than your input.");
+            else Print.nline("Try a lower number.");
+
+            triesLeft--;
         }
 
         // Check if the user won or lost
-        if (guessed) Print.line("YOU WIN! Secret number was really " + num, 1);
-        else Print.line("OPS! You are out of tries. Maybe next time...\nSecret number was " + num, 1);
+        if (guessed) Print.nline("YOU WIN! Secret number was really " + num);
+        else Print.nline("OPS! You are out of tries. Maybe next time...\nSecret number was " + num);
     }
 }
