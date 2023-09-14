@@ -1,6 +1,13 @@
 package patikaplus.util;
 
 public class Print {
+    public static void array(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////// line ///
     public static void line(String str, int amount) {
         for (int t = 0; t < amount; t++) {

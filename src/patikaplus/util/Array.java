@@ -1,6 +1,57 @@
 package patikaplus.util;
 
 public class Array {
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////// SORT ///
+    public static int[] sort(int[] arr) {
+        int length = arr.length;
+        int[] indexesSorted = new int[length];
+        int[] sorted = new int[length];
+
+        // Find sorted indexes of all the inputs
+        for (int i = 0; i < length; i++) { // For every integer in inputs
+            int input = arr[i]; // For easy access and more readability, I explicitly defined the current input
+            int index = (length - 1);
+
+            for (int in : arr) {
+                if (input == in) continue;
+                if (input < in) index--;
+            }
+            indexesSorted[i] = index;
+        }
+
+        // According to sorted indexes, create the sorted inputs array
+        for (int i = 0; i < length; i++) {
+            sorted[i] = arr[
+                    indexesSorted[i]];
+        }
+        return sorted;
+    }
+
+    public static float[] sort(float[] arr) {
+        int length = arr.length;
+        int[] indexesSorted = new int[length];
+        float[] sorted = new float[length];
+
+        // Find sorted indexes of all the inputs
+        for (int i = 0; i < length; i++) { // For every integer in inputs
+            float input = arr[i]; // For easy access and more readability, I explicitly defined the current input
+            int index = (length - 1);
+
+            for (float in : arr) {
+                if (input == in) continue;
+                if (input < in) index--;
+            }
+            indexesSorted[i] = index;
+        }
+
+        // According to sorted indexes, create the sorted inputs array
+        for (int i = 0; i < length; i++) {
+            sorted[i] = arr[
+                    indexesSorted[i]];
+        }
+        return sorted;
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////// REVERSE ///
     public static String reverse(String str) {
         char[] charArr = str.toCharArray();
         int len = charArr.length;
@@ -35,6 +86,7 @@ public class Array {
         return reversed;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////// DOES CONTAIN ///
     public static boolean doesContain(int[] arr, int i) {
         for (int e : arr) {
             if (e == i) return true;
@@ -50,6 +102,7 @@ public class Array {
         return false;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////// RECURRENCE COUNT ///
     public static int recurrenceCount(int[] arr, int element) {
         int count = 0;
         for (int e : arr) {
@@ -66,6 +119,13 @@ public class Array {
         return count;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////// UNIQUES ///
+
+    /**
+     * Returns an array of given type with no repetitive elements. Dependent on @method nunNullify.
+     * @param arr
+     * @return an array of given type with no repetitive elements.
+     */
     private static Integer[] uniques(Integer[] arr) {
         Integer[] uniques = new Integer[arr.length];
         uniques[0] = arr[0];
@@ -77,6 +137,7 @@ public class Array {
         return nonNullify(uniques);
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////// NON NULLIFY ///
     /**
      * Resizes the given arr to get rid of its null objects.
      */
