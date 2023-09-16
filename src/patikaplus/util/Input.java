@@ -32,6 +32,10 @@ public class Input {
     }
 
     // Misc
+
+    /**
+     * Resets the scanner by reinitializing the class to avoid buffer issues.
+     */
     public static void resetScanner() {
         new Input();
     }

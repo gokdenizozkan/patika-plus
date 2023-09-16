@@ -1,6 +1,20 @@
 package patikaplus.util;
 
 public class Array {
+    // COPY
+    public static int[] copyAndEnlarge(int[] arr, int enlargeAmount, boolean enlargeEnd) {
+        int[] enlargedArr = new int[arr.length + enlargeAmount];
+
+        int iStart; // start index
+        if (enlargeEnd) iStart = 0;
+        else iStart = enlargeAmount;
+
+        for (int i = 0; i < arr.length; i++) {
+            enlargedArr[iStart] = arr[i];
+            iStart++;
+        }
+        return enlargedArr;
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////// SORT ///
     public static int[] sort(int[] arr) {
         int length = arr.length;

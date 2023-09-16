@@ -8,23 +8,14 @@ public class Print {
         System.out.println();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////// line ///
-    public static void nline(String str) {
-        System.out.println(str);
+    // LINE
+
+    public static void line(int i) {
+        System.out.print(i);
     }
 
-    public static void nline(String str, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.println(str);
-        }
-    }
-
-    public static void line(String str, String beg, String end) {
-        System.out.print(beg + str + end);
-    }
-
-    public static void line(String str, String end) {
-        System.out.print(str + end);
+    public static void line(String str) {
+        System.out.print(str);
     }
 
     public static void line(String str, int amount) {
@@ -39,6 +30,24 @@ public class Print {
         }
     }
 
+    public static void line(String str, String beg, String end) {
+        System.out.print(beg + str + end);
+    }
+
+    public static void line(String str, String end) {
+        System.out.print(str + end);
+    }
+
+    public static void nline(String str) {
+        System.out.println(str);
+    }
+
+    public static void nline(String str, int amount) {
+        for (int t = 0; t < amount; t++) {
+            System.out.println(str);
+        }
+    }
+
     public static void fline(String str, Object... formatting) {
         System.out.printf(str, formatting);
     }
@@ -49,7 +58,20 @@ public class Print {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////// num ///
+    public static void nfline(String str, Object... formatting) {
+        System.out.printf(str + "\n", formatting);
+    }
+
+    public static void nfline(int amount, String str, Object... formatting) {
+        for (int t = 0; t < amount; t++) {
+            System.out.printf(str + "\n", formatting);
+        }
+    }
+
+    // NUM
+    public static void num (int i) {
+        System.out.print(i);
+    }
     public static void num(int i, int amount) {
         for (int t = 0; t < amount; t++) {
             System.out.print(i);
