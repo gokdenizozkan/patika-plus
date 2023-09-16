@@ -15,7 +15,7 @@ public class Array {
         }
         return enlargedArr;
     }
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////// SORT ///
+    // SORT
     public static int[] sort(int[] arr) {
         int length = arr.length;
         int[] indexesSorted = new int[length];
