@@ -48,6 +48,24 @@ public class Array {
     	return narrowed;
     }
     
+    /**
+     * Removes the given object and resizes the array accordingly (-1).
+     * Limitations: Object to be removed will be the first occurrence in the array.
+     * @param arr mentioned array.
+     * @param remove object to be removed.
+     * @return a resized array without the object.
+     */
+    public static Object[] removeAndNarrow(Object[] arr, int remove) {
+    	Object[] narrowed = new Object[arr.length - 1];
+    	int iRemove = indexOf(arr, remove);
+    	
+    	for (int i = 0; i < narrowed.length; i++) {
+    		if (i >= iRemove) narrowed[i] = arr[i + 1];
+    		else narrowed[i] = arr[i];
+    	}
+    	return narrowed;
+    }
+    
     // INDEX OF
     /**
      * Returns the index of the given object.
@@ -56,6 +74,23 @@ public class Array {
      * @return index of the given object. -1 if object is not found.
      */
     public static int indexOf(int[] arr, int object) {
+    	for (int i = 0; i < arr.length; i++) {
+    		if (arr[i] == object) {
+    			return i;
+    		}
+    	}
+    	return -1;
+    }
+    
+    
+    // INDEX OF
+    /**
+     * Returns the index of the given object.
+     * @param arr array to search for.
+     * @param object to be found in the array.
+     * @return index of the given object. -1 if object is not found.
+     */
+    public static int indexOf(Object[] arr, Object object) {
     	for (int i = 0; i < arr.length; i++) {
     		if (arr[i] == object) {
     			return i;
@@ -148,6 +183,17 @@ public class Array {
         return reversed;
     }
 
+    public static Object[] reverse(Object[] intArr) {
+        int len = intArr.length;
+        Object[] reversed = new Object[len];
+
+        len--; // to make it index
+        for (int i = len; i >= 0; i--) {
+            reversed[len - i] = intArr[i];
+        }
+        return reversed;
+    }
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////// DOES CONTAIN ///
     public static boolean doesContain(int[] arr, int i) {
         for (int e : arr) {
