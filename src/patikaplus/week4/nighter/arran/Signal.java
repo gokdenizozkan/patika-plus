@@ -3,6 +3,7 @@ package patikaplus.week4.nighter.arran;
 import patikaplus.week4.nighter.blup.Being;
 import patikaplus.week4.nighter.blup.Item;
 import patikaplus.week4.nighter.blup.Location;
+import patikaplus.week4.nighter.blup.Scene;
 import patikaplus.week4.nighter.manag.SignalManager;
 
 public class Signal {
@@ -11,7 +12,8 @@ public class Signal {
     private final Being emitterBeing;
     private final Item emitterItem;
     private final Location emitterLocation;
-
+    private final Scene emitterScene;
+    
     public Signal(Object emitter, Type type) {
         this.type = type;
         this.emitter = emitter;
@@ -19,6 +21,7 @@ public class Signal {
         this.emitterBeing = null;
         this.emitterItem = null;
         this.emitterLocation = null;
+        this.emitterScene = null;
     }
 
     public Signal(Being emitter, Type type) {
@@ -28,6 +31,7 @@ public class Signal {
         this.emitter = null;
         this.emitterItem = null;
         this.emitterLocation = null;
+        this.emitterScene = null;
     }
 
     public Signal(Item emitter, Type type) {
@@ -37,6 +41,7 @@ public class Signal {
         this.emitter = null;
         this.emitterBeing = null;
         this.emitterLocation = null;
+        this.emitterScene = null;
     }
 
     public Signal(Location emitter, Type type) {
@@ -46,6 +51,17 @@ public class Signal {
         this.emitter = null;
         this.emitterBeing = null;
         this.emitterItem = null;
+        this.emitterScene = null;
+    }
+    
+    public Signal(Scene emitter, Type type) {
+        this.type = type;
+        this.emitterScene = emitter;
+
+        this.emitter = null;
+        this.emitterBeing = null;
+        this.emitterItem = null;
+        this.emitterLocation = null;
     }
 
 
@@ -55,6 +71,10 @@ public class Signal {
 
     public void emit(int value) {
         SignalManager.receiveSignal(this, value);
+    }
+    
+    public void emit(Object... sths) {
+    	SignalManager.receiveSignal(this, sths);
     }
 
     public Object getEmitter() {
@@ -79,7 +99,8 @@ public class Signal {
 
     public enum Type {
         DIED(Group.BEING), ATTACKED(Group.BEING), DEFENDED(Group.BEING), FLED(Group.BEING), LOOTED(Group.BEING),
-        LOCATIONADDED(Group.LOCATION);
+        LOCATIONADDED(Group.LOCATION),
+        CUT(Group.SCENE), CHARACTERCREATED(Group.SCENE);
 
         private final Group group;
 
@@ -92,7 +113,7 @@ public class Signal {
         }
 
         public enum Group {
-            BEING, ITEM, LOCATION;
+            BEING, ITEM, LOCATION, SCENE;
         }
     }
 }

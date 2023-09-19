@@ -27,6 +27,12 @@ public class Print {
     public static void options(String... options) {
         //
     }
+    
+    public static void options(Object... options) {
+        for (int i = 0; i < options.length; i++) {
+        	
+        }
+    }
 
     // Misc
     private static void ln(int... amount) {

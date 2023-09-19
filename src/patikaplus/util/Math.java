@@ -48,13 +48,26 @@ public class Math {
     // POW
 
     /**
+     * Returns the long value of base, multiplied by itself for the given exponent param times.
+     * @param base a number to be multiplied by itself.
+     * @param exponent decides how many times will the base be multiplied by itself.
+     * @return long value of base, multiplied by itself for param exponent times.
+     */
+    public static long pow(long base, int exponent) {
+        long num = base; // return num
+        for (int i = 1; i < exponent; i++) num *= base;
+        return num;
+    }
+    
+
+    /**
      * Returns the integer value of base, multiplied by itself for the given exponent param times.
      * @param base a number to be multiplied by itself.
      * @param exponent decides how many times will the base be multiplied by itself.
      * @return integer value of base, multiplied by itself for param exponent times.
      */
-    private static long calcPow(long base, int exponent) {
-        long num = base; // return num
+    public static int pow(int base, int exponent) {
+        int num = base; // return num
         for (int i = 1; i < exponent; i++) num *= base;
         return num;
     }

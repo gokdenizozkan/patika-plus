@@ -1,6 +1,7 @@
 package patikaplus.week4.nighter.manag;
 
 import patikaplus.week4.nighter.blup.Being;
+import patikaplus.week4.nighter.blup.Vessel;
 import patikaplus.week4.nighter.util.Input;
 import patikaplus.week4.nighter.util.Print;
 import patikaplus.week4.nighter.util.Tengri;
@@ -14,7 +15,7 @@ public class GameManager {
     private static State gameState;
 
     protected static void start() {
-        // START GAME
+        SceneManager.newGame();
     }
 
     protected static void end() {
@@ -24,6 +25,26 @@ public class GameManager {
     protected static void tick() {
         // UPDATE COMPONENTS OF THE GAME
     }
+    
+    protected static Being getPlayer() {
+        return player;
+    }
+    
+    public static void setPlayer(Being player) {
+    	GameManager.player = player;
+    }
+
+    protected static State getGameState() {
+        return gameState;
+    }
+
+	public static void createPlayer(String name, Vessel vessel) {
+		player = new Being(name, vessel);
+	}
+	
+	public static Being createBeing(String name, Vessel vessel) {
+		return new Being(name, vessel);
+	}
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////// COMBAT \\\
     public static class Fight {
@@ -110,13 +131,5 @@ public class GameManager {
             loop();
         }
     }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////// Misc \\\
-    protected static Being getPlayer() {
-        return player;
-    }
-
-    protected static State getGameState() {
-        return gameState;
-    }
 }

@@ -1,6 +1,7 @@
 package patikaplus.week4.nighter.manag;
 
 import patikaplus.week4.nighter.arran.Signal;
+import patikaplus.week4.nighter.blup.Vessel;
 
 public class SignalManager {
     public static void receiveSignal(Signal signal, Object... args) {
@@ -8,6 +9,7 @@ public class SignalManager {
             case BEING -> handleBeing(signal, args);
             case ITEM -> handleItem(signal, args);
             case LOCATION -> handleLocation(signal, args);
+            case SCENE -> handleScene(signal, args);
         }
     }
 
@@ -46,5 +48,15 @@ public class SignalManager {
         switch (signal.getType()) {
             case LOCATIONADDED -> LocationManager.addLocation(signal.getEmitterLocation());
         }
+    }
+    
+    private static void handleScene(Signal signal, Object... args) {
+    	switch (signal.getType()) {
+    		case CHARACTERCREATED -> {
+    			// if for player
+    			if ((Boolean) args[0]) GameManager.createPlayer((String) args[1], (Vessel) args[2]);
+    			else GameManager.createBeing((String) args[1], (Vessel) args[2]);
+    		}
+    	}
     }
 }

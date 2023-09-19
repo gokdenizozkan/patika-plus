@@ -15,6 +15,54 @@ public class Array {
         }
         return enlargedArr;
     }
+    
+    public static Object[] copyAndEnlarge(Object[] arr, int enlargeAmount, boolean enlargeEnd) {
+    	Object[] enlargedArr = new Object[arr.length + enlargeAmount];
+
+        int iStart; // start index
+        if (enlargeEnd) iStart = 0;
+        else iStart = enlargeAmount;
+
+        for (int i = 0; i < arr.length; i++) {
+            enlargedArr[iStart] = arr[i];
+            iStart++;
+        }
+        return enlargedArr;
+    }
+    
+    /**
+     * Removes the given object and resizes the array accordingly (-1).
+     * Limitations: Object to be removed will be the first occurrence in the array.
+     * @param arr mentioned array.
+     * @param remove object to be removed.
+     * @return a resized array without the object.
+     */
+    public static int[] removeAndNarrow(int[] arr, int remove) {
+    	int[] narrowed = new int[arr.length - 1];
+    	int iRemove = indexOf(arr, remove);
+    	
+    	for (int i = 0; i < narrowed.length; i++) {
+    		if (i >= iRemove) narrowed[i] = arr[i + 1];
+    		else narrowed[i] = arr[i];
+    	}
+    	return narrowed;
+    }
+    
+    // INDEX OF
+    /**
+     * Returns the index of the given object.
+     * @param arr array to search for.
+     * @param object to be found in the array.
+     * @return index of the given object. -1 if object is not found.
+     */
+    public static int indexOf(int[] arr, int object) {
+    	for (int i = 0; i < arr.length; i++) {
+    		if (arr[i] == object) {
+    			return i;
+    		}
+    	}
+    	return -1;
+    }
     // SORT
     public static int[] sort(int[] arr) {
         int length = arr.length;
@@ -171,6 +219,32 @@ public class Array {
         }
 
         Integer[] nonNullifiedArr = new Integer[len - nullCount];
+        int i = 0;
+        for (int e = 0; e < len; e++) {
+            if (arrMap[e] == 0) continue;
+            nonNullifiedArr[i] = arr[e];
+            i++;
+        }
+
+        return nonNullifiedArr;
+    }
+    
+    public static String[] nonNullify(String[] arr) {
+        int len = arr.length;
+        int[] arrMap = new int[len];
+        int nullCount = 0;
+
+        // Find nullCount and map the arr
+        for (int i = 0; i < len; i++) {
+            if (arr[i] == null) {
+                nullCount++;
+                arrMap[i] = 0;
+                continue;
+            }
+            arrMap[i] = 1;
+        }
+
+        String[] nonNullifiedArr = new String[len - nullCount];
         int i = 0;
         for (int e = 0; e < len; e++) {
             if (arrMap[e] == 0) continue;

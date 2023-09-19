@@ -32,7 +32,7 @@ public class Being {
         this.maxHealth = this.vessel.getBaseHealth();
         this.currentHealth = maxHealth;
 
-        this.totalDamage = (this.vessel.getBaseDamage() + weapon.getAtkPoint());
+        this.totalDamage = (this.vessel.getBaseDamage());
     }
 
     public void attack() {

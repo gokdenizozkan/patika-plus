@@ -16,5 +16,6 @@ public class PerfectNumberFinder {
         }
 
         System.out.println(number + " is a " + (sumOfFactors == number ? "perfect number!" : "normal number."));
+        input.close();
     }
 }

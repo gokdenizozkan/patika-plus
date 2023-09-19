@@ -9,7 +9,7 @@ public class Print {
     }
 
     // LINE
-
+    
     public static void line(int i) {
         System.out.print(i);
     }
