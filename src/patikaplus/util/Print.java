@@ -41,6 +41,10 @@ public class Print {
     public static void nline(String str) {
         System.out.println(str);
     }
+    
+    public static void nline(int num) {
+        System.out.println(num);
+    }
 
     public static void nline(String str, int amount) {
         for (int t = 0; t < amount; t++) {
