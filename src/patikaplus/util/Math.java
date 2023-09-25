@@ -54,6 +54,9 @@ public class Math {
      * @return long value of base, multiplied by itself for param exponent times.
      */
     public static long pow(long base, int exponent) {
+    	if (base == 1 || exponent == 0) return 1;
+    	if (base == 0 || exponent == 1) return base;
+    	
         long num = base; // return num
         for (int i = 1; i < exponent; i++) num *= base;
         return num;
@@ -67,6 +70,9 @@ public class Math {
      * @return integer value of base, multiplied by itself for param exponent times.
      */
     public static int pow(int base, int exponent) {
+    	if (base == 1 || exponent == 0) return 1;
+    	if (base == 0 || exponent == 1) return base;
+    	
         int num = base; // return num
         for (int i = 1; i < exponent; i++) num *= base;
         return num;
