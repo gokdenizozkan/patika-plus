@@ -1,9 +1,9 @@
 package patikaplus.util;
 
-public class Print {
-    public static void array(int[] arr) {
-        for (int i : arr) {
-            System.out.print(i + " ");
+public class Print <T> extends Object {
+    public static <T> void array(T[] arr) {
+        for (T e : arr) {
+            System.out.print(e + " ");
         }
         System.out.println();
     }
