@@ -31,6 +31,8 @@ bin/
 
 ### Folders ###
 src/test/
+src/patikaplus/week4/nighter/
 
 ### Files ###
 src/Main.java
+src/patikaplus/week5/Solution.java
