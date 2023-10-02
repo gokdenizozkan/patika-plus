@@ -1,4 +1,4 @@
-package patikaplus.util;
+package com.gokdenizozkan.util;
 
 public class Array <T> extends Object {
     // COPY

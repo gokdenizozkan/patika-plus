@@ -19,7 +19,7 @@ public class Sepet <E extends Object> {
 				return;
 			}
 		}
-		array = patikaplus.util.Array.copyAndEnlarge(array, 1, true);
+		array = com.gokdenizozkan.util.Array.copyAndEnlarge(array, 1, true);
 		array[array.length - 1] = element;
 	}
 	
@@ -34,7 +34,7 @@ public class Sepet <E extends Object> {
 	}
 	
 	public void remove(int index) {
-		array = patikaplus.util.Array.removeAndNarrow(array, index);
+		array = com.gokdenizozkan.util.Array.removeAndNarrow(array, index);
 	}
 	
 	public void set(int index, E element) {

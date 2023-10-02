@@ -1,8 +1,8 @@
 package patikaplus.week2;
 
-import patikaplus.util.Input;
-import patikaplus.util.Print;
-import patikaplus.util.Tengri;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Print;
+import com.gokdenizozkan.util.Tengri;
 
 public class NumberGuessing {
     public static void main(String[] args) {

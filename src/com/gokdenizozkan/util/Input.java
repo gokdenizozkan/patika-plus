@@ -1,8 +1,8 @@
-package patikaplus.util;
+package com.gokdenizozkan.util;
 
 import java.util.Scanner;
 
-public class Input <T> extends Object {
+public class Input {
     private static Scanner sc;
 
     // Initializes class attributes (like Scanner sc)
@@ -17,26 +17,31 @@ public class Input <T> extends Object {
 
     // Methods
     public static int getInt(String... ask) {
-        if (!isEmpty(ask)) System.out.println(ask[0]);
+        System.out.print(ask + " ");
         return sc.nextInt();
     }
 
-    public static String getLine(String... ask) {
-        if (!isEmpty(ask)) System.out.println(ask[0]);
+    public static String getLine(String ask) {
+        System.out.print(ask + " ");
         return sc.nextLine();
     }
 
-    public static String[] getLine(char separator, String... ask) {
-        if (!isEmpty(ask)) System.out.println(ask[0]);
+    public static String[] getLine(char separator, String ask) {
+        System.out.print(ask + " ");
         return sc.nextLine().trim().split(String.valueOf(separator));
+    }
+
+    public static String[] getLine(String separator, String ask) {
+        System.out.println(ask);
+        return sc.nextLine().trim().split(separator);
     }
     
     /**
      * Returns the option user selected.
      * @param <T> type
-     * @param question 
-     * @param options
-     * @return selection
+     * @param question to lead the user to select an appropriate option.
+     * @param options user can select.
+     * @return selection in the type it was given as an option
      */
     public static <T> T ask(String question, T... options) {
     	System.out.println(question);
@@ -45,6 +50,26 @@ public class Input <T> extends Object {
         }
         
         return options[sc.nextInt() - 1];
+    }
+    
+    /**
+     * Program pausing input prompt.
+     * @param <T> type
+     * @param question to lead the user to select an appropriate option.
+     */
+    public static void await(String question) {
+    	System.out.println(question);
+    	sc.nextLine();
+    }
+    
+    /**
+     * Program pausing input prompt. Informs the user with this text: "Please enter any key to resume."
+     * @param <T> type
+     */
+    public static void await() {
+    	System.out.println("Please enter any key to resume.");
+    	resetScanner();
+    	sc.nextLine();
     }
 
     // Misc

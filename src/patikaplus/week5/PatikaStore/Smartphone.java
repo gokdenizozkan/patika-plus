@@ -1,4 +1,6 @@
-protected class Smartphone extends Product {
+package patikaplus.week5.PatikaStore;
+
+public class Smartphone extends Product {
     private int memory;
     private float screenSize;
     private int battery;

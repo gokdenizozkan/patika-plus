@@ -1,4 +1,4 @@
-package patikaplus.util;
+package com.gokdenizozkan.util;
 
 public class Parse {
     public static double[] toArrayDouble(String[] arr) {

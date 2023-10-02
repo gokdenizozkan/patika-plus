@@ -1,15 +1,15 @@
 package patikaplus.week1;
 
-import patikaplus.util.Input;
-import patikaplus.util.Math;
-import patikaplus.util.Print;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Math;
+import com.gokdenizozkan.util.Print;
 
 public class ArmstrongNumFinder {
 	public static void run() {
 		int length, num, remaining, sum = 0;
-		String numString;
+		//String numString;
 		
-		numString = Input.getLine("Please enter a number:");
+		String numString = Input.getLine("Please enter a number:");
 		length = numString.length();
 		
 		num = Integer.parseInt(numString);

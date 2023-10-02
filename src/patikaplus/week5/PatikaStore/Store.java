@@ -1,3 +1,5 @@
+package patikaplus.week5.PatikaStore;
+
 public class Store {
     Priority<Brand> brands;
     

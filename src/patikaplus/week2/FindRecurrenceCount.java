@@ -1,7 +1,7 @@
 package patikaplus.week2;
 
-import patikaplus.util.Array;
-import patikaplus.util.Input;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Array;
 
 public class FindRecurrenceCount {
     public static void run() { // 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5
@@ -28,7 +28,7 @@ public class FindRecurrenceCount {
         uniques[0] = arr[0];
 
         for (int i = 0; i < arr.length; i++) {
-            if (Array.doesContain(uniques, arr[i])) continue;
+            if (Array.contains(uniques, arr[i])) continue;
             uniques[i] = arr[i];
         }
         return nonNullify(uniques);

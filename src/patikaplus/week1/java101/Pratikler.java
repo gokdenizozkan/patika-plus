@@ -1,4 +1,4 @@
-package java101;
+package patikaplus.week1.java101;
 
 import java.util.HashMap;
 import java.util.Map;

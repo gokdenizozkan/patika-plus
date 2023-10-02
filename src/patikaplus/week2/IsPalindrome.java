@@ -1,7 +1,7 @@
 package patikaplus.week2;
 
-import patikaplus.util.Array;
-import patikaplus.util.Input;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Array;
 
 public class IsPalindrome {
     public static void main(String[] args) {

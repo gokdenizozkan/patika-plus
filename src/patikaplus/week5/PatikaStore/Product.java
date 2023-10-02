@@ -1,4 +1,6 @@
-protected abstract class Product {
+package patikaplus.week5.PatikaStore;
+
+public abstract class Product {
     private int id;
     private static int assignId = 0;
     

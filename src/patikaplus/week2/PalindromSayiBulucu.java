@@ -1,6 +1,6 @@
 package patikaplus.week2;
 
-import patikaplus.util.Input;
+import com.gokdenizozkan.util.Input;
 
 public class PalindromSayiBulucu {
     public static void run() {

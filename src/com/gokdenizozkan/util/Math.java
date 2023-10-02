@@ -1,4 +1,4 @@
-package patikaplus.util;
+package com.gokdenizozkan.util;
 
 public class Math {
     // MIN MAX

@@ -1,7 +1,7 @@
 package patikaplus.week4;
 
-import patikaplus.util.Input;
-import patikaplus.util.Print;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Print;
 
 public class TryCatch {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package patikaplus.util;
+package com.gokdenizozkan.util;
 
 import java.util.Random;
 

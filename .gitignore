@@ -32,7 +32,11 @@ bin/
 ### Folders ###
 src/test/
 src/patikaplus/week4/nighter/
+week1/
+week2/
+week4/
 
 ### Files ###
 src/Main.java
 src/patikaplus/week5/Solution.java
+

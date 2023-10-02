@@ -1,15 +1,14 @@
 package patikaplus.week2;
 
-import patikaplus.util.Input;
-import patikaplus.util.Parse;
-import patikaplus.util.Print;
+import com.gokdenizozkan.util.Input;
+import com.gokdenizozkan.util.Print;
+import com.gokdenizozkan.util.Parse;
 
 import java.util.ArrayList;
 
 public class RecurringNumFinder {
     public static void run() {
-        System.out.println("Please enter your data set separated with spaces:\n(10 50 200 90)");
-        int[] ins = Parse.toArrayInt(Input.getLine(' '));
+        int[] ins = Parse.toArrayInt(Input.getLine(' ', "Please enter your data set separated with spaces:\n(10 50 200 90)"));
         ArrayList<Integer> recurs = new ArrayList<>();
 
         for (int i : ins) {
