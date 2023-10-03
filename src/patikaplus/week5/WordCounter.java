@@ -2,13 +2,19 @@ package patikaplus.week5;
 
 import java.util.HashMap;
 
+import com.gokdenizozkan.util.Input;
+
 public class WordCounter {
     private static HashMap<String, Integer> wordCounts = new HashMap<>();
     
     public static void main(String[] args) {
-        String sentence = "Oh ma darling, oh-my darling, oh-my darling Clementine! You were lost and gone forever, dreadful sorrow Clementine.";
-        System.out.println(sentence);
-        System.out.println(getWordWithHighestFrequency(sentence));
+        
+        //String sentence = "Oh ma darling, oh-my darling, oh-my darling Clementine! You were lost and gone forever, dreadful sorrow Clementine.";
+        //System.out.println(sentence);
+        //System.out.println(getWordWithHighestFrequency(sentence));
+        System.out.println(
+                getWordWithHighestFrequency(
+                        Input.getLine("Please enter a sentence:")));
     }
     
     public static String getWordWithHighestFrequency(String str) {
