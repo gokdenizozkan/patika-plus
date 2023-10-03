@@ -1,4 +1,7 @@
-package patikaplus.week5.PatikaStore;
+package patikaplus.week5.PatikaStore.products;
+
+import patikaplus.week5.PatikaStore.Brand;
+import patikaplus.week5.PatikaStore.Product;
 
 public class Smartphone extends Product {
     private int memory;
@@ -7,8 +10,7 @@ public class Smartphone extends Product {
     private int ram;
     private Color color;
     
-    protected Smartphone(Brand brand, String name, int unitPrice, int stockAmount, float discountRate,
-                        int memory, float screenSize, int battery, int ram, Color Color) {
+    public Smartphone(Brand brand, String name, int unitPrice, int stockAmount, float discountRate, int memory, float screenSize, int battery, int ram, Color color) {
         super(brand, name, unitPrice, stockAmount, discountRate);
         this.memory = memory;
         this.screenSize = screenSize;
@@ -17,7 +19,7 @@ public class Smartphone extends Product {
         this.color = color;
     }
     
-    protected enum Color {
+    public enum Color {
         BLACK, RED, BLUE;
     }    
 }

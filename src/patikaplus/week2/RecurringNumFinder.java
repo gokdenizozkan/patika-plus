@@ -13,7 +13,7 @@ public class RecurringNumFinder {
 
         for (int i : ins) {
             if (recurs.contains(i)) {
-                Print.num(i, 1);
+                Print.line(i, 1);
                 Print.line(" ", 1);
             }
             recurs.add(i);

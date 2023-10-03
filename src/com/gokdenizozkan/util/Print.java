@@ -9,50 +9,33 @@ public class Print <T> extends Object {
         System.out.println();
     }
 
-    // LINE
-    
-    public static void line(int i) {
-        System.out.print(i);
+    // PRINT LINE
+    public static <T> void line(T toPrint) {
+        System.out.print(toPrint);
     }
 
-    public static void line(String str) {
-        System.out.print(str);
-    }
-
-    public static void line(String str, int amount) {
+    public static <T> void line(T toPrint, int amount) {
         for (int t = 0; t < amount; t++) {
-            System.out.print(str);
+            System.out.print(toPrint);
         }
-    }
-
-    public static void line(char c, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.print(c);
-        }
-    }
-
-    public static void line(String str, String beg, String end) {
-        System.out.print(beg + str + end);
-    }
-
-    public static void line(String str, String end) {
-        System.out.print(str + end);
-    }
-
-    public static void nline(String str) {
-        System.out.println(str);
     }
     
-    public static void nline(int num) {
-        System.out.println(num);
+    // PRINT LINE WITH NEWLINE AT THE END
+    public static void nline() {
+        System.out.println();
+    }
+    
+    public static <T> void nline(T toPrint) {
+        System.out.println(toPrint);
     }
 
-    public static void nline(String str, int amount) {
+    public static <T> void nline(T toPrint, int amount) {
         for (int t = 0; t < amount; t++) {
-            System.out.println(str);
+            System.out.println(toPrint);
         }
     }
 
+    // PRINT FORMATTED LINE
     public static void fline(String str, Object... formatting) {
         System.out.printf(str, formatting);
     }
@@ -63,6 +46,7 @@ public class Print <T> extends Object {
         }
     }
 
+    // PRINT FORMATTED LINE WITH NEWLINE AT THE END
     public static void nfline(String str, Object... formatting) {
         System.out.printf(str + "\n", formatting);
     }
@@ -73,35 +57,7 @@ public class Print <T> extends Object {
         }
     }
 
-    // NUM
-    public static void num (int i) {
-        System.out.print(i);
-    }
-    public static void num(int i, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.print(i);
-        }
-    }
 
-    public static void num(float f, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.print(f);
-        }
-    }
-
-    public static void num(long l, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.print(l);
-        }
-    }
-
-    public static void num(double d, int amount) {
-        for (int t = 0; t < amount; t++) {
-            System.out.print(d);
-        }
-    }
-
-    
     // MISC
     public static void title(String title) {
     	lineOfChar('#', title.length() * 3, 2);
