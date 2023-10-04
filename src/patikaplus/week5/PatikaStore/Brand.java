@@ -1,10 +1,7 @@
 package patikaplus.week5.PatikaStore;
 
 import java.util.ArrayList;
-import java.util.function.Function;
-
 import com.gokdenizozkan.util.Input;
-import com.gokdenizozkan.util.Print;
 
 
 public class Brand implements Comparable<Brand> {
@@ -28,8 +25,7 @@ public class Brand implements Comparable<Brand> {
         Brand selection = (Brand) Input.ask("Select your brand: ", brands.toArray(), Input.VisualRepresentation.applyToStringToList);
         //if (selection == "Register new") return new Brand(Input.getLine("Enter the brand name:"));
         //else return new Brand(selection);
-        Print.line(selection.getName());
-        return new Brand("uiy");
+        return selection;
     }
     
     public String getName() {

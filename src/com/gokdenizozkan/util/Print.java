@@ -59,6 +59,7 @@ public class Print <T> extends Object {
 
 
     // MISC
+    
     public static void title(String title) {
     	lineOfChar('#', title.length() * 3, 2);
         

@@ -24,7 +24,7 @@ public class Input {
 
     public static float getFloat(String ask) {
         System.out.print(ask + " ");
-        return sc.nextInt();
+        return sc.nextFloat();
     }
     
     public static String getLine(String ask) {
@@ -85,7 +85,7 @@ public class Input {
      * @param visualRepresentation You may set your visual representations with a pre-defined array of your choice. Make sure its length and ordering matches with the options parameter.
      * @return selection in the type it was given as an option
      */
-    public static <T, VR> T ask(String question, T[] options, VR[] visualRepresentation) {
+    /*public static <T, VR> T ask(String question, T[] options, VR[] visualRepresentation) {
         System.out.println(question);
         
         for (int i = 0; i < options.length; i++) {
@@ -93,7 +93,7 @@ public class Input {
         }
         
         return options[sc.nextInt() - 1];
-    }
+    }*/
     
     /**
      * Program pausing input prompt.

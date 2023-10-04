@@ -7,18 +7,8 @@ import com.gokdenizozkan.util.Print;
 import patikaplus.week5.PatikaStore.products.Laptop;
 import patikaplus.week5.PatikaStore.products.Smartphone;
 
+import java.util.ArrayList;
 import java.util.function.Function;
-
-/*
- * Kullanıcı sistem üzerinden ilgili kategorideki (Notebook, Cep Telefonları vb.) ürünleri listeyebilimeli
-
-
-Ürünler listelenirken tablo şeklinde konsol ekranında gösterilmeli (System.out.format() kullanılabilir).
-
-
-Kullanıcı ürünlerin benzersiz numaralarına ve markalarına göre filtreleyip listeleyebilmeli.
- * 
- */
 
 public class Store {
     
@@ -36,16 +26,12 @@ public class Store {
     }
     
     public void mainMenu() {
+        Print.nline("- PATIKA STORE PRODUCT MANAGEMENT PROGRAM -");
         while (true) {
-            switch (Input.ask("Please choose the action you want to do:", Action.values(), visualRepresentation.apply(Action.values()))) {
+            switch (Input.ask("Please choose the action you want to do:", Action.values(), visualRepresentation)) {
                 case LIST_PRODUCTS -> {
                     if (Product.getProductees().isEmpty()) Print.nline("There are no products available in the store.\nYou may create one to list it.\n\nReturning to the main menu.");
-                    else {
-                        // TODO LIST
-                        
-                        
-                        // TODO FILTER OPTION
-                    }
+                    else listProducts();
                 }
                 
                 case ADD_PRODUCT -> {
@@ -95,6 +81,71 @@ public class Store {
     
     private void deleteProduct() {
         Product.delete(Input.getInt("Please enter the ID of the product you want to delete:"));
+    }
+    
+    private void listProducts() {
+        ArrayList<Product> producteesToList = new ArrayList<>();
+        String type = (String) Input.ask("Choose the product type you want to list:", Product.getAvailableProducteeTypes().toArray());
+        producteesToList = Product.getProducteesOfType(type);
+        
+        switch (Input.ask("How to list?", new String[]{"List all", "List and sort by ID", "List and sort by Brand", "List and filter by Brand", "Return to main menu"})) {
+            case "List all" -> {
+                printProducts(producteesToList, type);
+            }
+            
+            case "List and sort by ID" -> {
+                Product.setSortWithId(true);
+                producteesToList.sort(null);
+                printProducts(producteesToList, type);
+            }
+            
+            case "List and sort by Brand" -> {
+                Product.setSortWithId(false);
+                producteesToList.sort(null);
+                printProducts(producteesToList, type);
+            }
+            
+            case "List and filter by Brand" -> {
+                Brand filteringBrand = (Brand) Input.ask("Choose the brand to filter:", Brand.getBrands().toArray(), Input.VisualRepresentation.applyToStringToList);
+                
+                producteesToList = Product.filterListByBrand(producteesToList, filteringBrand);
+                printProducts(producteesToList, type);
+            }
+            
+            case "Return to main menu" -> {
+                return;
+            }
+
+        }    
+    }
+    
+    private void printProducts(ArrayList<Product> producteesToPrint, String type) {        
+        String headerFormat = "";
+        String bodyFormat = "";
+        String[] header = null; // values for header
+        
+        switch (type) {
+            case "Smartphone" -> {
+                headerFormat = Smartphone.getHeaderFormat();
+                bodyFormat = Smartphone.getBodyFormat();
+                header = Smartphone.getHeader();
+            }
+            
+            case "Laptop" -> {
+                headerFormat = Laptop.getHeaderFormat();
+                bodyFormat = Laptop.getBodyFormat();
+                header = Laptop.getHeader();
+            }
+        }
+        String headerToPrint = String.format(headerFormat, (Object[]) header);
+        Print.nline(headerToPrint);
+        Print.lineOfChar('-', headerToPrint.length(), 1);
+        
+        for (Product p : producteesToPrint) {
+            String toPrint = String.format(bodyFormat, p.getAllData());
+            Print.line(toPrint);
+            Print.lineOfChar('-', toPrint.length());
+        }
     }
     
     public void addDefaultBrands() {

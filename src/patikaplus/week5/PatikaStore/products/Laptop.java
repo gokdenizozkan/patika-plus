@@ -23,4 +23,33 @@ public class Laptop extends Product {
         this.ram = ram;
         this.screenSize = screenSize;
     }
+
+    public static String getBodyFormat() {
+        String bodyFormat = """
+                | %-10d | %-5d | %-10f |
+                """;
+        return Product.bodyFormat + bodyFormat;
+    }
+    
+    public static String getHeaderFormat() {
+        String headerFormat = "| %-10s | %-5s | %-10s |";
+        return Product.headerFormat + headerFormat;
+    }
+    
+    public static String[] getHeader() {
+        return new String[] {"STORAGE", "RAM", "SCREEN SIZE"};
+    }
+    
+    @Override
+    public Object[] getAllData() {
+        Object[] fundamental = super.getAllData();
+        Object[] data = new Object[] {
+                this.storage, this.ram, this.screenSize
+        };
+        
+        Object[] dataAll = new Object[fundamental.length + data.length];
+        System.arraycopy(fundamental, 0, dataAll, 0, fundamental.length);
+        System.arraycopy(data, 0, dataAll, fundamental.length, data.length);
+        return dataAll;
+    }
 }
