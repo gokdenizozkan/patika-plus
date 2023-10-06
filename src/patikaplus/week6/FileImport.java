@@ -7,7 +7,7 @@ public class FileImport {
     BufferedReader bufferedReader;
 
     public FileImport() throws FileNotFoundException {
-        file = new File("C:\\Users\\Gökdeniz\\Documents\\Java\\patika-plus\\src\\patikaplus\\week6\\nums.txt");
+        file = new File("src/patikaplus/week6/nums.txt");
         bufferedReader = new BufferedReader(new FileReader(file));
     }
 
