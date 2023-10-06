@@ -29,9 +29,3 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-### Folders ###
-src/test/
-src/dev/patika/plus/week4/nighter/
-week1/
-week2/
-week4/
