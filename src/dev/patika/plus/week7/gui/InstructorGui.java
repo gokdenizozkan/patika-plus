@@ -4,8 +4,11 @@ import dev.patika.plus.week7.helper.Config;
 import dev.patika.plus.week7.helper.Helper;
 import dev.patika.plus.week7.model.Course;
 import dev.patika.plus.week7.model.Instructor;
+import dev.patika.plus.week7.model.Operator;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class InstructorGui extends JFrame {
     private final Instructor instructor;
@@ -22,7 +25,15 @@ public class InstructorGui extends JFrame {
 
     public InstructorGui(Instructor instructor) {
         this.instructor = instructor;
+        constructorConfigurations();
+    }
 
+    public InstructorGui(Operator operator) {
+        this.instructor = null;
+        constructorConfigurations();
+    }
+
+    private void constructorConfigurations() {
         add(wrapper);
         setSize(1000, 500);
         setLocation(Helper.screenCenter("x", getSize()), Helper.screenCenter("y", getSize()));
@@ -66,7 +77,11 @@ public class InstructorGui extends JFrame {
     public void loadAssignedCourseList() {
         ((DefaultTableModel) tbl_assignedCourseList.getModel()).setRowCount(0);
 
-        for (Course course : Course.getList(instructor.getId())) {
+        ArrayList<Course> courses;
+        if (instructor == null) courses = Course.getList();
+        else courses = Course.getList(instructor.getId());
+
+        for (Course course : courses) {
             int i = 0;
             row_assignedCourseList[i++] = course.getId();
             row_assignedCourseList[i++] = course.getName();
@@ -74,9 +89,5 @@ public class InstructorGui extends JFrame {
             row_assignedCourseList[i] = course.getPath().getName();
             mdl_assignedCourseList.addRow(row_assignedCourseList);
         }
-    }
-
-    public static void main(String[] args) {
-        new LoginGui();
     }
 }

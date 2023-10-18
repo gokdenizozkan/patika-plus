@@ -62,6 +62,7 @@ public class OperatorGui extends JFrame {
     private Object[] row_pathList;
     private JPopupMenu pathMenu;
     private final Operator operator;
+
     public OperatorGui(Operator operator) {
         this.operator = operator;
         add(wrapper);
@@ -75,6 +76,9 @@ public class OperatorGui extends JFrame {
 
         lbl_welcome.setText(operator.getName() + ", welcome!");
 
+        initPathDeletionPopupMenuAndActionListener();
+        initEditContentGuiPopupMenuAndActionListener();
+
         // Model USER LIST
         mdl_userList = new DefaultTableModel() {
             @Override
@@ -83,6 +87,58 @@ public class OperatorGui extends JFrame {
                 return super.isCellEditable(row, column);
             }
         };
+        initAll();
+    }
+
+    private void initEditContentGuiPopupMenuAndActionListener() {
+        JPopupMenu editContentMenu = new JPopupMenu();
+        JMenuItem editContentMenuUpdate = new JMenuItem("Update");
+        JMenuItem editContentMenuDelete = new JMenuItem("Delete");
+        editContentMenu.add(editContentMenuUpdate);
+        editContentMenu.add(editContentMenuDelete);
+
+        // add popupmenu to table courseList
+        tbl_courseList.setComponentPopupMenu(editContentMenu);
+
+        // update
+        editContentMenuUpdate.addActionListener(e -> {
+            int selectedId = (int) tbl_courseList.getValueAt(tbl_courseList.getSelectedRow(), 0);
+            EditContentGui editContentGui = new EditContentGui(selectedId);
+            editContentGui.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadCourseModel();
+                }
+            });
+        });
+
+
+
+        // delete
+        editContentMenuDelete.addActionListener(e -> {
+            if (Helper.confirm("deletion")) {
+                int selectedId = (int) tbl_courseList.getValueAt(tbl_courseList.getSelectedRow(), 0);
+                if (Course.deleteById(selectedId)) {
+                    Helper.showMessage("done");
+                    loadCourseModel();
+                } else {
+                    Helper.showMessage("error");
+                }
+            }
+        });
+        tbl_courseList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = e.getPoint();
+                int selectedRow = tbl_courseList.rowAtPoint(point);
+                tbl_courseList.setRowSelectionInterval(selectedRow, selectedRow);
+
+                //super.mousePressed(e);
+            }
+        });
+    }
+
+    private void initAll() {
         Object[] col_userList = {"ID", "Name", "Username", "Password", "Type"};
         mdl_userList.setColumnIdentifiers(col_userList);
 
@@ -92,7 +148,7 @@ public class OperatorGui extends JFrame {
         tbl_userList.setModel(mdl_userList);
         tbl_userList.getTableHeader().setReorderingAllowed(false);
 
-         //// PATH LIST
+        //// PATH LIST
         mdl_pathList = new DefaultTableModel();
         Object[] col_pathList = {"ID", "Path Name"};
         mdl_pathList.setColumnIdentifiers(col_pathList);
@@ -161,7 +217,7 @@ public class OperatorGui extends JFrame {
         JMenuItem pathMenuDelete = new JMenuItem("Delete");
         pathMenu.add(pathMenuUpdate);
         pathMenu.add(pathMenuDelete);
-        // update
+        // updateEnrollment
         pathMenuUpdate.addActionListener(e -> {
             int selectedId = Integer.parseInt(tbl_pathList.getValueAt(tbl_pathList.getSelectedRow(), 0).toString());
             UpdatePathGui updatePathGui = new UpdatePathGui(Path.fetchBy(selectedId));
@@ -285,14 +341,49 @@ public class OperatorGui extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        Operator op = new Operator();
-        op.setId(1);
-        op.setName("Mustafa Çetindağ");
-        op.setPassword("1234");
-        op.setType("operator");
-        op.setUsername("mustafa");
-        OperatorGui opGui = new OperatorGui(op);
+    private void initPathDeletionPopupMenuAndActionListener() {
+        pathMenu = new JPopupMenu();
+        JMenuItem pathMenuUpdate = new JMenuItem("Update");
+        JMenuItem pathMenuDelete = new JMenuItem("Delete");
+        pathMenu.add(pathMenuUpdate);
+        pathMenu.add(pathMenuDelete);
+        // update path
+        pathMenuUpdate.addActionListener(e -> {
+            int selectedId = (int) tbl_pathList.getValueAt(tbl_pathList.getSelectedRow(), 0);
+            UpdatePathGui updatePathGui = new UpdatePathGui(Path.fetchBy(selectedId));
+            updatePathGui.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadPathModel();
+                    loadPathCombo();
+                    loadCourseModel();
+                }
+            });
+        });
+        // delete
+        pathMenuDelete.addActionListener(e -> {
+            if (Helper.confirm("deletion")) {
+                int selectedId = (int) tbl_pathList.getValueAt(tbl_pathList.getSelectedRow(), 0);
+                if (Path.delete(selectedId)) {
+                    Helper.showMessage("done");
+                    loadPathModel();
+                    loadPathCombo();
+                    loadCourseModel();
+                } else {
+                    Helper.showMessage("error");
+                }
+            }
+        });
+        tbl_pathList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = e.getPoint();
+                int selectedRow = tbl_pathList.rowAtPoint(point);
+                tbl_pathList.setRowSelectionInterval(selectedRow, selectedRow);
+
+                //super.mousePressed(e);
+            }
+        });
     }
 
     public void loadUserModel() {
@@ -356,7 +447,9 @@ public class OperatorGui extends JFrame {
     public void loadPathCombo() {
         cmb_coursePath.removeAllItems();
         for (Path path : Path.getList()) {
-            cmb_coursePath.addItem(new Item(path.getId(), path.getName()));
+            String name = path.getName();
+            if (name == "operator") continue;
+            cmb_coursePath.addItem(new Item(path.getId(), name));
         }
     }
 

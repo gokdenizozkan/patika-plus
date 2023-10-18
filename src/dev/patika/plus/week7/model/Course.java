@@ -42,6 +42,33 @@ public class Course {
         return courseList;
     }
 
+    public static ArrayList<Course> getList(Path path) {
+        ArrayList<Course> courseList = new ArrayList<>();
+        Course course;
+
+        String query = "SELECT * FROM public.course WHERE path_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = DbConnector.getInstance().prepareStatement(query);
+            preparedStatement.setInt(1, path.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            // manually
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int userId = resultSet.getInt("user_id");
+                int pathId = resultSet.getInt("path_id");
+                String name = resultSet.getString("name");
+                String language = resultSet.getString("lang");
+
+                course = new Course(id, userId, pathId, name, language);
+                courseList.add(course);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return courseList;
+    }
+
     public static ArrayList<Course> getList(int ofUserId) {
         ArrayList<Course> courseList = new ArrayList<>();
         String query = "SELECT * FROM public.course WHERE user_id = ?";
@@ -103,6 +130,11 @@ public class Course {
         try {
             PreparedStatement ps = DbConnector.getInstance().prepareStatement(query);
             ps.setInt(1, id);
+
+            for (Content content : Content.getList(id)) {
+                Content.delete(content.getId());
+            }
+
             return ps.executeUpdate() != -1;
 
         } catch (Exception e) {
@@ -124,6 +156,32 @@ public class Course {
                     int userId = resultSet.getInt("user_id");
                     int pathId = resultSet.getInt("path_id");
                     String name = resultSet.getString("name");
+                    String language = resultSet.getString("lang");
+
+                    return new Course(id, userId, pathId, name, language);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
+    public static Course fetchBy(String name) {
+        Course course = null;
+        String query = String.format("SELECT * FROM public.course WHERE name = ?");
+        try {
+            PreparedStatement preparedStatement = DbConnector.getInstance().prepareStatement(query);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                if (resultSet.getString("name").equals(name)){
+                    int id = resultSet.getInt("id");
+                    int userId = resultSet.getInt("user_id");
+                    int pathId = resultSet.getInt("path_id");
                     String language = resultSet.getString("lang");
 
                     return new Course(id, userId, pathId, name, language);

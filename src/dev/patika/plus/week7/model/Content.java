@@ -127,6 +127,26 @@ public class Content {
         return contentList;
     }
 
+    public static Content fetchBy(int id) {
+        String query = "SELECT * FROM public.content WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = DbConnector.getInstance().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int course_id = resultSet.getInt("course_id");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                String youtubeLink = resultSet.getString("youtube_link");
+                String quizQuestions = resultSet.getString("quiz_questions");
+                return new Content(id, title, description, youtubeLink, quizQuestions, course_id);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public int getId() {
         return id;
     }
