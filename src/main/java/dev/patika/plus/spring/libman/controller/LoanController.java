@@ -1,5 +1,6 @@
 package dev.patika.plus.spring.libman.controller;
 
+import dev.patika.plus.spring.libman.dto.LoanRequest;
 import dev.patika.plus.spring.libman.dto.LoanUpdateRequest;
 import dev.patika.plus.spring.libman.entity.Loan;
 import dev.patika.plus.spring.libman.service.LoanService;
@@ -20,8 +21,8 @@ public class LoanController {
         this.loanService = loanService;
     }
     @PostMapping("/lend-book")
-    String lendBook(@PathVariable long bookId) {
-        boolean success = loanService.lendBook(bookId);
+    String lendBook(@Valid LoanRequest loanRequest) {
+        boolean success = loanService.lendBook(loanRequest);
         if (success) return "Book lent successfully";
         else return "Book could not be lent, not enough stock";
     }

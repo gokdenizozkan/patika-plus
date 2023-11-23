@@ -1,5 +1,6 @@
 package dev.patika.plus.spring.libman.service;
 
+import dev.patika.plus.spring.libman.dto.LoanRequest;
 import dev.patika.plus.spring.libman.dto.LoanUpdateRequest;
 import dev.patika.plus.spring.libman.entity.Loan;
 import dev.patika.plus.spring.libman.repository.LoanRepository;
@@ -23,14 +24,22 @@ public class LoanService {
         this.bookService = bookService;
     }
 
-    public boolean lendBook(long bookId) {
-        Book book = bookRepository.findById(bookId).get();
+    public boolean lendBook(LoanRequest loanRequest) {
+        Book book = loanRequest.book();
         if (book.getStock() <= 0) {
             return false;
         }
 
         book.setStock(book.getStock() - 1);
         bookRepository.save(book);
+
+        Loan loan = new Loan();
+        loan.setBorrowerName(loanRequest.borrowerName());
+        loan.setBorrowerEmail(loanRequest.borrowerEmail());
+        loan.setBorrowingDate(loanRequest.borrowingDate());
+        loan.setReturnDate(loanRequest.returnDate());
+        loan.setBook(book);
+        loanRepository.save(loan);
         return true;
     }
 
