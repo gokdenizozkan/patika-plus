@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center;">
+
+<h1>User Form</h1>
+
+<form action="/submit" method="post" style="max-width: 300px; margin: 0 auto; background-color: #fafafa; border: 1px solid #ddd; border-radius: 5px; padding: 15px;">
+
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" required style="width: 100%; box-sizing: border-box; margin-bottom: 5px;">
+
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" required style="width: 100%; box-sizing: border-box; margin-bottom: 5px;">
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required style="width: 100%; box-sizing: border-box; margin-bottom: 5px;">
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required style="width: 100%; box-sizing: border-box; margin-bottom: 5px;">
+
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female" required>
+    <label for="female">Female</label><br>
+
+    <label for="favoriteFruit">Favorite Fruit:</label><br>
+    <select id="favoriteFruit" name="favoriteFruit" required style="width: 100%; box-sizing: border-box; margin-bottom: 5px;">
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="strawberry">Strawberry</option>
+    </select><br>
+
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="30" style="width: 100%; box-sizing: border-box; margin-bottom: 5px;"></textarea><br>
+
+    <input type="submit" value="Submit" style="background-color: #4caf50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">
+</form>
+
+</body>
+</html>
